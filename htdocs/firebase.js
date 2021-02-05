@@ -31,6 +31,26 @@
       //   promise.catch (e => console.log(e.message));
       // });
 
+
+
+
+     function SubmitContactInfo()
+     {
+      const nameContact = document.getElementById("nameContact")
+      const emailContact = document.getElementById("emailContact")
+      const phoneContact = document.getElementById("phoneContact")
+      const messageContact = document.getElementById("messageContact")
+
+      database.ref('/Contact/').push().set({
+        name: nameContact.value,
+        email: emailContact.value,
+        phone: phoneContact.value,
+        message: messageContact.value,
+
+
+      });
+     }
+
       function SignIn(){
 
         const txtPassword = document.getElementById('Password');
