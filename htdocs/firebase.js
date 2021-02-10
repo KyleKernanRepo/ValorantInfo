@@ -150,6 +150,26 @@
      
      }
     
+    function Next()
+    {
+      const question = document.getElementById("Question");
+      const Option1 = document.getElementById("Option1");
+      const Option2 = document.getElementById("Option2");
+      const Option3 = document.getElementById("Option3");
+      const Option4 = document.getElementById("Option4");
+       const database = firebase.database();
+         database.ref('/Quiz/Agents/Omen/2').on('value', function(snapshot){
+          question.innerHTML = snapshot.val().Question;
+          Option1.innerHTML = snapshot.val().Option1;
+           Option2.innerHTML = snapshot.val().Option2;
+            Option3.innerHTML = snapshot.val().Option3;
+             Option4.innerHTML = snapshot.val().Option4;
+
+
+         });
+      
+      
+    }
 
      function SignOut(){
 
