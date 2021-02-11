@@ -19,6 +19,9 @@
       const txtEmail = document.getElementById('Email');
       const btnSignUp = document.getElementById('SignUpButton');
       const btnSignIn = document.getElementById('SignInButton');
+      let counter = 0;
+     
+
 //    const btnLogOut = document.getElementById('LogOutButton');
 
        //btnSignIn.addEventListener('click', e => {
@@ -95,47 +98,62 @@
          const database = firebase.database();
       database.ref('/users/' + user.uid).on('value', function(snapshot){
         const agents = snapshot.val().agents;
+      
         if (agents == "Jett") {
           window.location = "jett.html";
+          Next();
         }
          else if (agents == "Raze") {
           window.location = "raze.html";
+          Next();
         }
          else if (agents == "Reyna") {
           window.location = "reyna.html";
+          Next();
         }
          else if (agents == "Yoru") {
           window.location = "yoru.html";
+          Next();
         }
          else if (agents == "Phoenix") {
           window.location = "phoenix.html";
+          Next();
         }
          else if (agents == "Sage") {
           window.location = "sage.html";
+          Next();
         }
          else if (agents == "Cypher") {
           window.location = "cypher.html";
+          Next();
         }
          else if (agents == "Killjoy") {
           window.location = "killjoy.html";
+          Next();
         }
          else if (agents == "Sky") {
           window.location = "sky.html";
+          Next();
         }
          else if (agents == "Breach") {
           window.location = "breach.html";
+          Next();
         }
          else if (agents == "Sova") {
           window.location = "sova.html";
+          Next();
         }
          else if (agents == "Brimstone") {
           window.location = "brimstone.html";
+          Next();
         }
          else if (agents == "Omen") {
           window.location = "omen.html";
+          Next();
         }
          else if (agents == "Viper") {
           window.location = "viper.html";
+          Next();
         }
         else{
           alert("no agent");
@@ -152,14 +170,26 @@
     
     function Next()
     {
-      const question = document.getElementById("Question");
+      counter++;
+       const database = firebase.database();
+       const user = firebase.auth().currentUser;
+     
+
+      
+      database.ref('/users/' + user.uid).on('value', function(snapshot){
+        const agents = snapshot.val().agents;
+        
+      const Question = document.getElementById("Question");
       const Option1 = document.getElementById("Option1");
       const Option2 = document.getElementById("Option2");
       const Option3 = document.getElementById("Option3");
       const Option4 = document.getElementById("Option4");
-       const database = firebase.database();
-         database.ref('/Quiz/Agents/Omen/2').on('value', function(snapshot){
-          question.innerHTML = snapshot.val().Question;
+     
+
+
+     
+         database.ref('/Quiz/Agents/' + agents + '/' + counter.toString()).on('value', function(snapshot){
+          Question.innerHTML = snapshot.val().Question;
           Option1.innerHTML = snapshot.val().Option1;
            Option2.innerHTML = snapshot.val().Option2;
             Option3.innerHTML = snapshot.val().Option3;
@@ -167,6 +197,10 @@
 
 
          });
+
+      });
+
+   
       
       
     }
