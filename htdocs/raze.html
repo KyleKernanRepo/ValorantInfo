@@ -82,21 +82,30 @@
             <div id = "options">
 
             <label>
-                <input type="radio" name="radio"> <p id ="Option1"> Yes they do damage. </p>
+                <input type="radio" name="radio" value="1"> <p id ="Option1"> Yes they do damage. </p>
             </label>
             <br>
               <label>
-                <input type="radio" name="radio"> <p id ="Option2"> No they don't do damage. </p>
+                <input type="radio" name="radio" value="2"> <p id ="Option2"> No they don't do damage. </p>
+            </label>
+            <br>
+                  <label>
+                 <input type="radio" name="radio" value="3"> <p id ="Option3"> 4 Smokes </p> 
             </label>
             <br>
                 
+                  <label>
+                <input type="radio" name="radio" value="4"> <p id ="Option4"> 5 Smokes </p> 
+            </label>
+
+                
             </div>
-            <div class= "container">
+             <div class= "container">
                 <div class ="row">
-                <div id="prev" class ="col"> <button class="btn btn-primary btn-block">Previous</button>
+                <div id="next" class="col"> <button class="btn btn-primary btn-block" onclick="Next()">Next</button>
                     
                 </div>
-                <div id="next" class="col"> <button class="btn btn-primary btn-block" onclick="Next()">Next</button>
+                <div class="col"> <button class="btn btn-primary btn-block" onclick="SubmitQuiz()" id="SubmitQuiz" visibility="hidden">Submit</button>
                     
                 </div>
                     

@@ -20,6 +20,7 @@
       const btnSignUp = document.getElementById('SignUpButton');
       const btnSignIn = document.getElementById('SignInButton');
       let counter = 0;
+       let score = 0;
      
 
 //    const btnLogOut = document.getElementById('LogOutButton');
@@ -170,11 +171,37 @@
     
     function Next()
     {
-      counter++;
+     
+      
        const database = firebase.database();
        const user = firebase.auth().currentUser;
-     
+      
+       var ele = document.getElementsByName('radio');
+       let CorrectOption = "test"; 
 
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked)
+                {
+                  CorrectOption = ele[i].value;
+                  database.ref('/users/' + user.uid).on('value', function(snapshot){
+                  const agents = snapshot.val().agents;
+                  database.ref('/Quiz/Agents/' + agents + '/' + counter.toString()).on('value', function(snapshot){
+                        if (CorrectOption == snapshot.val().CorrectOption) {
+                          
+                          score++;
+
+                        }
+
+
+                  });
+
+
+                });
+        
+                }
+             
+            }
+            counter++;
       
       database.ref('/users/' + user.uid).on('value', function(snapshot){
         const agents = snapshot.val().agents;
@@ -185,7 +212,7 @@
       const Option3 = document.getElementById("Option3");
       const Option4 = document.getElementById("Option4");
      
-
+    
 
      
          database.ref('/Quiz/Agents/' + agents + '/' + counter.toString()).on('value', function(snapshot){
@@ -194,6 +221,7 @@
            Option2.innerHTML = snapshot.val().Option2;
             Option3.innerHTML = snapshot.val().Option3;
              Option4.innerHTML = snapshot.val().Option4;
+         
 
 
          });
@@ -203,6 +231,17 @@
    
       
       
+    }
+
+    function SubmitQuiz()
+    {
+     const user = firebase.auth().currentUser;
+      database.ref('/Quiz/users/' + user.uid).set({
+        score: score
+
+      });
+      alert("SubmitQuiz");
+
     }
 
      function SignOut(){
