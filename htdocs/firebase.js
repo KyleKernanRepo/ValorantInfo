@@ -69,6 +69,7 @@
 
         const txtPassword = document.getElementById('Password');
          const txtEmail = document.getElementById('Email');
+         const txtUsername = document.getElementById('Username');
          const selcAgents = document.getElementById('AgentPicker');
          const selcRank = document.getElementById('RankPicker');
 
@@ -86,6 +87,7 @@
        database.ref('/users/' + userID).set({
        email: document.getElementById("Email").value,
        password: document.getElementById('Password').value,
+       username: document.getElementById("Username").value,
        agents: document.getElementById('AgentPicker').value,
        ranks: document.getElementById('RankPicker').value
       
@@ -236,8 +238,16 @@
     function SubmitQuiz()
     {
      const user = firebase.auth().currentUser;
+     var username = "";
+     database.ref('users/' + user.uid).on('value', function(snapshot){
+      username = snapshot.val().username;
+
+
+     });
+
       database.ref('/Quiz/users/' + user.uid).set({
-        score: score
+        score: score,
+        username: username
 
       });
       alert("SubmitQuiz");
@@ -251,6 +261,51 @@
       });
 
      }
+
+
+     function addItemstoLeaderboard(username, score)
+     {
+      var ul = document.getElementById('highscore');
+      var _score = document.createElement('li');
+      var _username = document.createElement('li');
+
+      console.log(username);
+      _username.innerHTML = 'name =' + username;
+      _score.innerHTML = 'score =' + score;
+      ul.appendChild(_username);
+      ul.appendChild(_score);
+
+
+     }
+
+     function highscoreBoard()
+     {
+
+
+      database.ref('Quiz/users').once('value', function(snapshot){
+        
+        
+         alert("test");
+
+        snapshot.forEach(
+        function(childSnapshot)
+        {
+          console.log(childSnapshot.val());
+          let username = childSnapshot.val().username;
+          let score = childSnapshot.val().score;
+          addItemstoLeaderboard(username, score);
+
+
+        });
+
+      });
+
+     }
+
+    
+
+    
+
 
       //   firebase.auth().onAuthStateChanged(firebaseUser => {
       //     if(firebaseUser){
