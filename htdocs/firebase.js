@@ -21,7 +21,7 @@
       const btnSignIn = document.getElementById('SignInButton');
       let counter = 0;
        let score = 0;
-     
+      let sortScore = 0;
 
 //    const btnLogOut = document.getElementById('LogOutButton');
 
@@ -203,6 +203,7 @@
                 }
              
             }
+
             counter++;
       
       database.ref('/users/' + user.uid).on('value', function(snapshot){
@@ -238,6 +239,7 @@
     function SubmitQuiz()
     {
      const user = firebase.auth().currentUser;
+     sortScore = 0 - score;
      var username = "";
      database.ref('users/' + user.uid).on('value', function(snapshot){
       username = snapshot.val().username;
@@ -247,7 +249,8 @@
 
       database.ref('/Quiz/users/' + user.uid).set({
         score: score,
-        username: username
+        username: username,
+        sortScore: sortScore
 
       });
       alert("SubmitQuiz");
@@ -282,7 +285,7 @@
      {
 
 
-      database.ref('Quiz/users').once('value', function(snapshot){
+      database.ref('Quiz/users').orderByChild('sortScore').once('value', function(snapshot){
         
         
          alert("test");
@@ -290,35 +293,29 @@
         snapshot.forEach(
         function(childSnapshot)
         {
-          console.log(childSnapshot.val());
+          
           let username = childSnapshot.val().username;
           let score = childSnapshot.val().score;
           addItemstoLeaderboard(username, score);
 
-
         });
+
 
       });
 
+     
+    
+
+    
      }
 
-    
+
+
 
     
 
+    
 
-      //   firebase.auth().onAuthStateChanged(firebaseUser => {
-      //     if(firebaseUser){
-      //       console.log(firebaseUser);
-      //     } else {
-      //       console.log('not logged in');
-      //     }
 
-      // });
-
-      // btnLogOut.addEventListener('click',e =>{
-      //  firebase.auth().signOut();
-      // });
-     
-
+      
           
