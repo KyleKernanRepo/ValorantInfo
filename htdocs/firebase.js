@@ -19,7 +19,7 @@
       const txtEmail = document.getElementById('Email');
       const btnSignUp = document.getElementById('SignUpButton');
       const btnSignIn = document.getElementById('SignInButton');
-      let counter = 0;
+      let counter = 1;
        let score = 0;
       let sortScore = 0;
 
@@ -49,10 +49,11 @@
         name: nameContact.value,
         email: emailContact.value,
         phone: phoneContact.value,
-        message: messageContact.value,
+        message: messageContact.value
 
 
       });
+      alert("Submitted")
      }
 
       function SignIn(){
@@ -103,60 +104,62 @@
         const agents = snapshot.val().agents;
       
         if (agents == "Jett") {
+          
           window.location = "jett.html";
-          Next();
+         
         }
          else if (agents == "Raze") {
           window.location = "raze.html";
-          Next();
+         
         }
          else if (agents == "Reyna") {
           window.location = "reyna.html";
-          Next();
+         
         }
          else if (agents == "Yoru") {
           window.location = "yoru.html";
-          Next();
+          
         }
          else if (agents == "Phoenix") {
           window.location = "phoenix.html";
-          Next();
+          
         }
          else if (agents == "Sage") {
+          
           window.location = "sage.html";
-          Next();
+         
         }
          else if (agents == "Cypher") {
           window.location = "cypher.html";
-          Next();
+          
         }
          else if (agents == "Killjoy") {
           window.location = "killjoy.html";
-          Next();
+         
         }
          else if (agents == "Sky") {
           window.location = "sky.html";
-          Next();
+          
         }
          else if (agents == "Breach") {
           window.location = "breach.html";
-          Next();
+          
         }
          else if (agents == "Sova") {
           window.location = "sova.html";
-          Next();
+         
         }
          else if (agents == "Brimstone") {
           window.location = "brimstone.html";
-          Next();
+         
         }
          else if (agents == "Omen") {
           window.location = "omen.html";
-          Next();
+         
         }
          else if (agents == "Viper") {
           window.location = "viper.html";
-          Next();
+          
         }
         else{
           alert("no agent");
@@ -174,7 +177,7 @@
     function Next()
     {
      
-      
+       counter++;
        const database = firebase.database();
        const user = firebase.auth().currentUser;
       
@@ -189,22 +192,14 @@
                   const agents = snapshot.val().agents;
                   database.ref('/Quiz/Agents/' + agents + '/' + counter.toString()).on('value', function(snapshot){
                         if (CorrectOption == snapshot.val().CorrectOption) {
-                          
                           score++;
-
                         }
-
-
                   });
-
-
                 });
-        
                 }
-             
             }
 
-            counter++;
+           
       
       database.ref('/users/' + user.uid).on('value', function(snapshot){
         const agents = snapshot.val().agents;
@@ -229,8 +224,9 @@
 
          });
 
-      });
 
+      });
+       console.log(counter);
    
       
       
