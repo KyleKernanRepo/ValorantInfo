@@ -62,15 +62,31 @@
         <section class="page-section">
             <div class="container">
 
-                <div class="row">
+                <div class="row" style=" padding-left: 210px; padding-bottom: 50px;">
 
-                    <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit" onclick="highscoreBoard()" >Show LeaderBoard</button>
+                    <button  class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit" onclick="highscoreBoard()" >Show LeaderBoard</button>
                     
                 </div>
-                <ul id="highscore">
-                    
-                </ul>
 
+                <table class= "table">
+
+                    <thead class= "thead-dark" >
+                        <tr>
+                         
+                            <th scope="col">
+                                Username
+                            </th>
+                            <th scope="col">
+                                Score
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="testbody">
+                        
+                    </tbody>
+                        
+                </table>
 
             </div>
         </section>

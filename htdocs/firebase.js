@@ -62,6 +62,7 @@
          const txtEmail = document.getElementById('Email');
         const promise = auth.signInWithEmailAndPassword(txtEmail.value, txtPassword.value);
          promise.then(() => {alert("Signed In")
+          
        });
     
     }
@@ -264,15 +265,30 @@
 
      function addItemstoLeaderboard(username, score)
      {
-      var ul = document.getElementById('highscore');
+     /* var tr = document.getElementById('highscoreUser');
+      var tj = document.getElementById('highscoreScore');
       var _score = document.createElement('li');
       var _username = document.createElement('li');
 
       console.log(username);
-      _username.innerHTML = 'name =' + username;
-      _score.innerHTML = 'score =' + score;
-      ul.appendChild(_username);
-      ul.appendChild(_score);
+      _username.innerHTML = 'Name = ' + username;
+      _score.innerHTML = 'Score = ' + score;
+      tr.appendChild(_username);
+      tj.appendChild(_score);
+
+*/
+     
+      var tbody = document.getElementById('testbody');
+      var tr = document.createElement('tr');
+      var tduser = document.createElement('td');
+      var tdscore = document.createElement('td');
+      tduser.innerHTML = username;
+      tdscore.innerHTML = score;
+      tr.appendChild(tduser);
+      tr.appendChild(tdscore);
+      tbody.appendChild(tr);
+     
+
 
 
      }
@@ -289,10 +305,12 @@
         snapshot.forEach(
         function(childSnapshot)
         {
-          
+         
+
           let username = childSnapshot.val().username;
           let score = childSnapshot.val().score;
           addItemstoLeaderboard(username, score);
+          
 
         });
 
