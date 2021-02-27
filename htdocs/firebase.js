@@ -179,6 +179,8 @@
     {
      
        counter++;
+       var test = counter -1;
+
        const database = firebase.database();
        const user = firebase.auth().currentUser;
       
@@ -188,20 +190,29 @@
             for(i = 0; i < ele.length; i++) { 
                 if(ele[i].checked)
                 {
+                 
+
                   CorrectOption = ele[i].value;
+                   console.log(CorrectOption);
                   database.ref('/users/' + user.uid).on('value', function(snapshot){
+
                   const agents = snapshot.val().agents;
-                  database.ref('/Quiz/Agents/' + agents + '/' + counter.toString()).on('value', function(snapshot){
+                  database.ref('/Quiz/Agents/' + agents + '/' + test.toString()).on('value', function(snapshot){
+                        
+
                         if (CorrectOption == snapshot.val().CorrectOption) {
+
                           score++;
+                          
+                          
+
                         }
                   });
                 });
                 }
             }
 
-           
-      
+
       database.ref('/users/' + user.uid).on('value', function(snapshot){
         const agents = snapshot.val().agents;
         
@@ -220,17 +231,22 @@
            Option2.innerHTML = snapshot.val().Option2;
             Option3.innerHTML = snapshot.val().Option3;
              Option4.innerHTML = snapshot.val().Option4;
+             
+
          
 
 
          });
 
 
+
       });
-       console.log(counter);
+     
+
+      
    
       
-      
+       
     }
 
     function SubmitQuiz()
